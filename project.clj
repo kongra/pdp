@@ -31,4 +31,16 @@
                 "-XX:NewSize=400m"
                 "-XX:MaxNewSize=400m"
                 "-XX:-UseAdaptiveSizePolicy"
-                "-XX:SurvivorRatio=6"])
+                "-XX:SurvivorRatio=6"
+
+                ;; GC DEBUG
+                ;; "-verbose:gc"
+                "-XX:+PrintGCDetails"
+                "-XX:+PrintGCTimeStamps"
+                ;; "-Xloggc:gc.log"
+                ;; "-XX:+PrintTenuringDistribution"
+
+                ;; JCONSOLE DEBUG
+                ;; "-Xdebug"
+                ;; "-Xrunjdwp:transport=dt_socket,address=8021,server=y,suspend=n"
+                ])
