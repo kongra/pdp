@@ -4,9 +4,18 @@
   :license     {:name "Eclipse Public License"
                 :url "http://www.eclipse.org/legal/epl-v10.html"}
 
-  :dependencies   [[org.clojure/clojure "1.7.0"]
-                   [criterium           "0.4.3"]]
-  :plugins        [[cider/cider-nrepl   "0.9.1"]]
+  :dependencies   [[org.clojure/clojure              "1.7.0"]
+                   [criterium                        "0.4.3"]
+                   [org.apache.commons/commons-lang3 "3.4"]]
+
+  :hooks []
+  :disable-deps-clean true
+
+  :plugins        [[cider/cider-nrepl                "0.9.1"]]
+
+  :source-paths   ["src/clj"]
+
+  :resource-paths ["lib/jpdp.jar"]
 
   :global-vars    {*warn-on-reflection* true
                    *print-length*       500}
