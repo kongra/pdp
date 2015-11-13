@@ -4,18 +4,21 @@
   :license     {:name "Eclipse Public License"
                 :url "http://www.eclipse.org/legal/epl-v10.html"}
 
-  :dependencies   [[org.clojure/clojure              "1.7.0"]
-                   [criterium                        "0.4.3"]
-                   [org.apache.commons/commons-lang3 "3.4"]]
+  :dependencies   [[org.clojure/clojure "1.7.0"]
+                   [criterium           "0.4.3"]
+                   [clongra             "0.1.0-SNAPSHOT"]]
 
-  :hooks []
+  :plugins        [[cider/cider-nrepl   "0.9.1"]]
+
+  :main           pdp.core
+  :aot            :all
+
+  :hooks          []
   :disable-deps-clean true
 
-  :plugins        [[cider/cider-nrepl                "0.9.1"]]
-
   :source-paths   ["src/clj"]
-
-  :resource-paths ["lib/jpdp.jar"]
+  :resource-paths ["../clongra/lib/jclongra.jar"
+                   "../clongra/lib/flextao-inflector.jar"]
 
   :global-vars    {*warn-on-reflection* true
                    *print-length*       500}
@@ -23,6 +26,8 @@
   :jvm-opts       ["-server"
 
                    "-d64"
+
+                   "-Dlog4j.configurationFile=lib/log4j2.xml"
 
                    "-Xshare:off"
                    "-XX:+AggressiveOpts"

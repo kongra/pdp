@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="debug">
+  <Appenders>
+    <File name="OUTLOG" fileName="logs/out.log">
+      <PatternLayout pattern="%m%n"/>
+    </File>
+    <Async name="ASYNC">
+      <AppenderRef ref="OUTLOG"/>
+    </Async>
+  </Appenders>
+  <Loggers>
+    <Root level="debug">
+      <AppenderRef ref="ASYNC"/>
+    </Root>
+  </Loggers>
+</Configuration>
