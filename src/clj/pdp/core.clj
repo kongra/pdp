@@ -5,3 +5,5 @@
   (:use [clongra.core])
 
   (:gen-class))
+
+(load "core/data")
