@@ -20,7 +20,8 @@
   :disable-deps-clean true
 
   :source-paths   ["src/clj"]
-  :resource-paths ["../clongra/lib/jclongra.jar"
+  :resource-paths ["lib/jpdp.jar"
+                   "../clongra/lib/jclongra.jar"
                    "../clongra/lib/flextao-inflector.jar"]
 
   :global-vars    {*warn-on-reflection* true

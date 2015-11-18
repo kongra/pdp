@@ -8,3 +8,4 @@
   (:gen-class))
 
 (load "core/lexicon")
+(load "core/indexing")
