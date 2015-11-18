@@ -3,29 +3,34 @@
 
 (in-ns 'pdp.core)
 
-(defn prop
-  "Returns an interned property of a given name or nil when not found."
-  [^jpdp.core.Ruleset rs name]
-  (.getProp (.lexicon rs) name))
+(deftype Prop [name code]
+  Object
+  (toString [this] name))
 
 
-(defn assert-prop
-  "Works like prop, but raises an error when property was not found."
-  [rs name]
-  (if-let [p (prop rs name)]
-    p
-    (terror "Property was not found for name " name)))
+(deftype Value [origin]
+  Object
+  (toString [this] origin))
 
 
-(defn value
-  "Returns an interned value of a given origin or nil when not found."
-  [^jpdp.core.Ruleset rs origin]
-  (.getValue (.lexicon rs) origin))
+(defmacro defprops
+  [& names]
+  (when-not (= names (distinct names))
+    (terror "Prop names must be distinct."))
+
+  (let [inames  (map pair names (iterate inc 0))
+        clause  (fn [[name code]] `(defl ~name (Prop. ~(str name) ~code)))
+        clauses (map clause inames)]
+    `(do ~@clauses)))
 
 
-(defn assert-value
-  "Works like value, but raises an error when value was not found."
-  [rs origin]
-  (if-let [v (value rs origin)]
-    v
-    (terror "Value was not found for origin" origin)))
+(defmacro defvals
+  [& origins]
+  (when-not (= origins (distinct origins))
+    (terror "Origins of Values must be distinct."))
+
+  `(do ~@(map (fn [origin] `(defl ~origin (Value. ~(str origin)))) origins)))
+
+
+;; (defprops Engine Gearbox)
+;; (defvals  Diesel Benz Automat Manual)
