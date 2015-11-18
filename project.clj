@@ -6,9 +6,12 @@
 
   :dependencies   [[org.clojure/clojure "1.7.0"]
                    [criterium           "0.4.3"]
+                   [primitive-math      "0.1.3"]
                    [clongra             "0.1.0-SNAPSHOT"]]
 
-  :plugins        [[cider/cider-nrepl   "0.9.1"]]
+  :plugins        [[cider/cider-nrepl   "0.9.1"]
+                   ;; [lein-nodisassemble  "0.1.3" ]
+                   ]
 
   :main           pdp.core
   :aot            :all
