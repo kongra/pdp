@@ -20,14 +20,10 @@
      (.addLast ^java.util.LinkedList (.rules this) rule)))
 
   (eval-conf [this conf]
-    (synchronized
-     this
-     (let [it (.iterator ^java.util.LinkedList (.rules this))]
-       (loop []
-         (when (.hasNext it)
-           (let [r (.next it)]
-             (r conf)
-             (recur))))))))
+    ;; Intentionally we go with no synchronization, relying on the
+    ;; assumption that the process of creating (and thus adding) rules
+    ;; is completed before any evaluation.
+    (jpdp.core.Naive/evalLinked (.rules this) conf)))
 
 
 ;; BASED ON ARRAY LIST
@@ -47,9 +43,5 @@
      (.add ^java.util.ArrayList (.rules this) rule)))
 
   (eval-conf [this conf]
-    (synchronized
-     this
-     (let [^java.util.ArrayList rules (.rules this)]
-       (dotimes [i (.size rules)]
-         (let [r (.get rules (int i))]
-           (r conf)))))))
+    ;; See comment for LinkedEvaluator's implementation.
+    (jpdp.core.Naive/evalArray (.rules this) conf)))
