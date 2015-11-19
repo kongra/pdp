@@ -8,7 +8,7 @@
   (eval-conf-impl [this conf]))
 
 
-(def ^:private ev (atom nil))
+(def ev (atom nil))
 
 (defmacro commit-evaluator
   []
