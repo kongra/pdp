@@ -7,5 +7,8 @@
 
   (:gen-class))
 
-(load "core/lexicon")
-(load "core/conf"   )
+(load "core/lexicon"  )
+(load "core/conf"     )
+(load "core/evaluator")
+(load "core/naive"    )
+(load "core/rules"    )

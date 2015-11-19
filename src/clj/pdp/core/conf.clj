@@ -15,8 +15,3 @@
   [conf prop]
   (let [conf (vary-meta conf assoc :tag 'jpdp.core.Conf)]
     `(.get ~conf (lv ~prop))))
-
-
-;; (defprops Engine Gearbox)
-;; (defvals  Diesel Benz Auto Manual)
-;; (def c (make-conf 100))
