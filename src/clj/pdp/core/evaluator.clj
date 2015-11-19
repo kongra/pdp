@@ -4,5 +4,17 @@
 (in-ns 'pdp.core)
 
 (defprotocol Evaluator
-  (add-rule  [this rule])
-  (eval-conf [this conf]))
+  (add-rule       [this rule])
+  (eval-conf-impl [this conf]))
+
+
+(def ^:private ev (atom nil))
+
+(defmacro commit-evaluator
+  []
+  `(reset! ev ~'current-ev))
+
+
+(defn eval-conf
+  [conf]
+  (eval-conf-impl @ev conf))

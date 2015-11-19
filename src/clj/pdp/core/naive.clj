@@ -7,9 +7,9 @@
 
 (deftype LinkedEvaluator [rules])
 
-(defn make-linked-evaluator
+(defmacro def-linked-evaluator
   []
-  (LinkedEvaluator. (java.util.LinkedList.)))
+  `(def ~'current-ev (pdp.core.LinkedEvaluator. (java.util.LinkedList.))))
 
 
 (extend-type LinkedEvaluator
@@ -19,7 +19,7 @@
      this
      (.addLast ^java.util.LinkedList (.rules this) rule)))
 
-  (eval-conf [this conf]
+  (eval-conf-impl [this conf]
     ;; Intentionally we go with no synchronization, relying on the
     ;; assumption that the process of creating (and thus adding) rules
     ;; is completed before any evaluation.
@@ -30,9 +30,9 @@
 
 (deftype ArrayEvaluator [rules])
 
-(defn make-array-evaluator
+(defmacro def-array-evaluator
   []
-  (ArrayEvaluator. (java.util.ArrayList.)))
+  `(def ~'current-ev (pdp.core.ArrayEvaluator. (java.util.ArrayList.))))
 
 
 (extend-type ArrayEvaluator
@@ -42,6 +42,6 @@
      this
      (.add ^java.util.ArrayList (.rules this) rule)))
 
-  (eval-conf [this conf]
+  (eval-conf-impl [this conf]
     ;; See comment for LinkedEvaluator's implementation.
     (jpdp.core.Naive/evalArray (.rules this) conf)))
