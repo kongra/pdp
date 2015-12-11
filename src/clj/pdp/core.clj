@@ -7,3 +7,8 @@
   (:gen-class))
 
 (load "core/graph")
+
+;; (def ^java.util.Random rnd
+;;   (let [seed (byte-array 16)]
+;;     (aset ^bytes seed 0 (byte 1))
+;;     (org.uncommons.maths.random.MersenneTwisterRNG. seed)))
