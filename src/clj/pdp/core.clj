@@ -2,13 +2,8 @@
 ;; Created 2015-11-09
 
 (ns pdp.core
-  (:use     [clongra.core         ])
-  (:require [primitive-math :as pm])
+  (:use [clongra.core])
 
   (:gen-class))
 
-(load "core/lexicon"  )
-(load "core/conf"     )
-(load "core/evaluator")
-(load "core/naive"    )
-(load "core/rules"    )
+(load "core/graph")

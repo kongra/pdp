@@ -6,11 +6,10 @@
 
   :dependencies   [[org.clojure/clojure "1.7.0"]
                    [criterium           "0.4.3"]
-                   [primitive-math      "0.1.3"]
                    [clongra             "0.1.0-SNAPSHOT"]]
 
   :plugins        [[cider/cider-nrepl   "0.9.1"]
-                   ;; [lein-nodisassemble  "0.1.3" ]
+                   ;; [lein-nodisassemble               "0.1.3" ]
                    ]
 
   :main           pdp.core
@@ -20,7 +19,13 @@
   :disable-deps-clean true
 
   :source-paths   ["src/clj"]
-  :resource-paths ["lib/jpdp.jar"
+  :resource-paths ["lib/jcommon-1.0.12.jar"
+                   "lib/jfreechart-1.0.8.jar"
+                   "lib/uncommons-maths-1.2.3.jar"
+                   "lib/jacop-4.3.0.jar"
+
+                   "lib/jpdp.jar"
+
                    "../clongra/lib/jclongra.jar"
                    "../clongra/lib/flextao-inflector.jar"]
 
