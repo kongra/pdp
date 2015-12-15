@@ -6,7 +6,7 @@
 
   (:gen-class))
 
-(load "core/graph")
+(load "core/igraph")
 
 ;; (def ^java.util.Random rnd
 ;;   (let [seed (byte-array 16)]
