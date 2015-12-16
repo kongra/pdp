@@ -6,6 +6,6 @@ package jpdp.igraph;
 
 public interface IDigraph {
 
-  int[] predecessors();
+  int[] predecessors(int v);
 
 }

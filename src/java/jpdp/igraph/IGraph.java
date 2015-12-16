@@ -16,4 +16,6 @@ public interface IGraph {
 
   int[] successors(int v);
 
+	public IGraph cloneme();
+
 }
