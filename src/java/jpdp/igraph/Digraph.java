@@ -22,7 +22,7 @@ public final class Digraph extends AbstractGraph implements IDigraph {
   }
 
   @Override
-  public void removeVertex(int v) {
+  public synchronized void removeVertex(int v) {
     validateV(this, v);
 
     // Remove adjacency for all predecessors
@@ -45,7 +45,7 @@ public final class Digraph extends AbstractGraph implements IDigraph {
   }
 
   @Override
-  public void addEdge(int v1, int v2) {
+  public synchronized void addEdge(int v1, int v2) {
     validateV(this, v1);
     validateV(this, v2);
 
@@ -59,7 +59,7 @@ public final class Digraph extends AbstractGraph implements IDigraph {
   }
 
   @Override
-  public void removeEdge(int v1, int v2) {
+  public synchronized void removeEdge(int v1, int v2) {
     validateV(this, v1);
     validateV(this, v2);
 
