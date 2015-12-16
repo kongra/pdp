@@ -18,6 +18,16 @@ abstract class AbstractGraph implements IGraph, IMutableGraph {
   }
 
   @Override
+  public synchronized int verticesCount() {
+    return vs.cardinality();
+  }
+
+  @Override
+  public boolean isEmpty() {
+    return verticesCount() == 0;
+  }
+
+  @Override
   public synchronized int[] vertices() {
     return bitsOn3(vs);
   }

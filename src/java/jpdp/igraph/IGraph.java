@@ -10,6 +10,10 @@ public interface IGraph {
 
   int[] vertices();
 
+  int verticesCount();
+
+  boolean isEmpty();
+
   boolean hasVertex(int v);
 
   boolean hasEdge(int v1, int v2);

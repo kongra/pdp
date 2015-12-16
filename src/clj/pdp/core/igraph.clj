@@ -6,16 +6,33 @@
 ;; FAST MUTABLE UNWEIGHTED GRAPHS WITH INTEGRAL VERTICES IN RANGE
 ;; 0 .. (range-1)
 
-;; COMMON READS
+;; CONSTRUCTORS
 
 (defn unigraph
   [range]
   (jpdp.igraph.Unigraph. range))
 
 
+(defn digraph
+  [range]
+  (jpdp.igraph.Digraph. range))
+
+
+;; COMMON READS
+
 (defn igraph-range
   [^jpdp.igraph.IGraph g]
   (.range g))
+
+
+(defn igraph-vertices-count
+  [^jpdp.igraph.IGraph g]
+  (.verticesCount g))
+
+
+(defn igraph-empty?
+  [^jpdp.igraph.IGraph g]
+  (.isEmpty g))
 
 
 (defn igraph-vertices
@@ -91,3 +108,7 @@
 
 
 ;; (def ug (unigraph 100))
+;; (dotimes [i 20] (igraph-add-vertex! ug i))
+
+;; (def mapka (apply hash-map (take 200 (N))))
+;; (def secik (apply hash-set (take 0 (N))))
