@@ -48,6 +48,19 @@ abstract class AbstractGraph implements IGraph, IMutableGraph {
   }
 
   @Override
+  public synchronized Edge[] successorEdges(int v) {
+    final BitSet bs = adjs[v];
+    final int N = bs.cardinality();
+    final Edge[] edges = new Edge[N];
+    int v2 = bs.nextSetBit(0);
+    for (int i = 0; i < N; ++i) {
+      edges[i] = new Edge(v, v2);
+      v2 = bs.nextSetBit(v2 + 1);
+    }
+    return edges;
+  }
+
+  @Override
   public synchronized void addVertex(int v) {
     validateV(this, v);
     vs.set(v);

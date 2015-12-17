@@ -22,6 +22,19 @@ public final class Digraph extends AbstractGraph implements IDigraph {
   }
 
   @Override
+  public Edge[] predecessorEdges(int v) {
+    final BitSet bs = ins[v];
+    final int N = bs.cardinality();
+    final Edge[] edges = new Edge[N];
+    int v2 = bs.nextSetBit(0);
+    for (int i = 0; i < N; ++i) {
+      edges[i] = new Edge(v2, v);
+      v2 = bs.nextSetBit(v2 + 1);
+    }
+    return edges;
+  }
+
+  @Override
   public synchronized void removeVertex(int v) {
     validateV(this, v);
 

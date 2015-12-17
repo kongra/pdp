@@ -20,6 +20,8 @@ public interface IGraph {
 
   int[] successors(int v);
 
+  Edge[] successorEdges(int v);
+
 	public IGraph cloneme();
 
 }

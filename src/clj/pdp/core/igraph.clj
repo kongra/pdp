@@ -98,6 +98,32 @@
   (.removeEdge g v1 v2))
 
 
+;; EDGES
+
+(defn iedge-v1
+  {:inline (fn [e] `(.v1 ~e))}
+  [^jpdp.igraph.Edge e]
+  (.v1 e))
+
+
+(defn iedge-v2
+  {:inline (fn [e] `(.v2 ~e))}
+  [^jpdp.igraph.Edge e]
+  (.v2 e))
+
+
+(defn igraph-successor-edges
+  {:inline (fn [g v] `(.successorEdges ~g ~v))}
+  [^jpdp.igraph.IGraph g v]
+  (.successorEdges g v))
+
+
+(defn igraph-predecessor-edges
+  {:inline (fn [g v] `(.predecessorEdges ~g ~v))}
+  [^jpdp.igraph.IDigraph g v]
+  (.predecessorEdges g v))
+
+
 ;; DUMP/PRESENTATION
 
 (defn igraph-adjacent
@@ -116,8 +142,20 @@
    (print-graph v (igraph-adjacent g))))
 
 
-(def ^jpdp.igraph.Unigraph ug (unigraph 100))
-(dotimes [i 20] (igraph-add-vertex! ug i))
+;; TESTS
 
+(defn fc-unigraph
+  "Creates and returns a fully connected unigraph of range n."
+  [n]
+  (let [ug (unigraph n)]
+    (dotimes [v1 n]
+      (dotimes [v2 n]
+        (igraph-add-edge! ug v1 v2)))
+    ug))
+
+
+(def ^jpdp.igraph.IGraph g (fc-unigraph 100))
+
+;; (dotimes [i 20] (igraph-add-vertex! ug i))
 ;; (def mapka (apply hash-map (take 200 (N))))
 ;; (def secik (apply hash-set (take 0 (N))))

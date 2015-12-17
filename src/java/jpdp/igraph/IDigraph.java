@@ -8,4 +8,6 @@ public interface IDigraph {
 
   int[] predecessors(int v);
 
+  Edge[] predecessorEdges(int v);
+
 }
