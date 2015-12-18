@@ -1,0 +1,99 @@
+/*
+ * Copyright (c) Konrad Grzanek. All rights reserved.
+ * Created 2015-12-18
+ */
+package jpdp.igraph.util;
+
+import java.util.Arrays;
+
+public class I2Just<T> {
+
+  public I2Just(int range) {
+    entries = new Object[range];
+  }
+
+  public int range() {
+    return entries.length;
+  }
+
+  public int size() {
+    int s = 0;
+    for (Object e : entries) {
+      if (null != e) {
+        s += 1;
+      }
+    }
+    return s;
+  }
+
+  public boolean isEmpty() {
+    for (Object e : entries) {
+      if (null != e) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  public boolean containsKey(int n) {
+    return entries[n] != null;
+  }
+
+  public boolean containsValue(Object v) {
+    for (Object e : entries) {
+      if (v.equals(e)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  @SuppressWarnings("unchecked")
+  public T get(int n) {
+    final Object e = entries[n];
+    if (null == e) {
+      throw new IllegalStateException("No value for key " + n);
+    }
+    return (T) e;
+  }
+
+  @SuppressWarnings("unchecked")
+  public T safeGet(int n, T deflt) {
+    final Object e = entries[n];
+    return (T) (null == e ? deflt : e);
+  }
+
+  public void put(int n, T v) {
+    entries[n] = v;
+  }
+
+  public void remove(int n) {
+    entries[n] = null;
+  }
+
+  public void clear() {
+    for (int i = 0, n = range(); i < n; i++) {
+      remove(i);
+    }
+  }
+
+  @Override
+  public int hashCode() {
+    return 31 + Arrays.hashCode(entries);
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    I2Just other = (I2Just) obj;
+    return Arrays.equals(entries, other.entries);
+  }
+
+  private final Object[] entries;
+
+}

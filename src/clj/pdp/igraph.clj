@@ -1,7 +1,10 @@
 ;; Copyright (c) Konrad Grzanek. All rights reserved.
 ;; Created 2015-12-11
 
-(in-ns 'pdp.core)
+(ns pdp.igraph
+  (:use [clongra.core])
+
+  (:gen-class))
 
 ;; FAST MUTABLE UNWEIGHTED GRAPHS WITH INTEGRAL VERTICES IN RANGE
 ;; 0 .. (range-1)
@@ -154,7 +157,7 @@
     ug))
 
 
-(def ^jpdp.igraph.IGraph g (fc-unigraph 100))
+;; (def ^jpdp.igraph.IGraph g (fc-unigraph 100))
 
 ;; (dotimes [i 20] (igraph-add-vertex! ug i))
 ;; (def mapka (apply hash-map (take 200 (N))))

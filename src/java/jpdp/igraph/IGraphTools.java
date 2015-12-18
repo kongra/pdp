@@ -49,10 +49,13 @@ public final class IGraphTools {
   }
 
   public static void validateV(IGraph g, int v) {
-    final int n = g.range();
-    if (v < 0 || v >= n) {
+    validateV(g.range(), v);
+  }
+
+  public static void validateV(int range, int v) {
+    if (v < 0 || v >= range) {
       throw new IllegalArgumentException("Vertex " + v
-        + " is out of range 0 .. " + (n - 1));
+          + " is out of range 0 .. " + (range - 1));
     }
   }
 
