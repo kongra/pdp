@@ -13,9 +13,9 @@ public final class ISet {
     this.range = range;
   }
 
-	public int range() {
-		return range;
-	}
+  public int range() {
+    return range;
+  }
 
   public int size() {
     return entries.cardinality();
@@ -58,8 +58,21 @@ public final class ISet {
     return entries.equals(other.entries);
   }
 
+  @Override
+  public String toString() {
+    StringBuilder buf = new StringBuilder("#i{");
+    for (int n = entries.nextSetBit(0); n != -1;) {
+      buf.append(n);
+      n = entries.nextSetBit(n + 1);
+      if (n != -1) {
+        buf.append(" ");
+      }
+    }
+    return buf.append("}").toString();
+  }
+
   private final BitSet entries;
 
-	private final int range;
+  private final int range;
 
 }

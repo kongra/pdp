@@ -44,7 +44,7 @@ public final class I2I {
 
   public boolean containsValue(int v) {
     for (Entry e : entries) {
-      if (!e.isNull && e.n == v) {
+      if (!e.isNull && e.v == v) {
         return true;
       }
     }
@@ -56,17 +56,17 @@ public final class I2I {
     if (e.isNull) {
       throw new IllegalStateException("No value for key " + n);
     }
-    return e.n;
+    return e.v;
   }
 
   public int safeGet(int n, int deflt) {
     final Entry e = entries[n];
-    return e.isNull ? deflt : e.n;
+    return e.isNull ? deflt : e.v;
   }
 
   public void put(int n, int v) {
     final Entry e = entries[n];
-    e.n = v;
+    e.v = v;
     e.isNull = false;
   }
 
@@ -83,6 +83,28 @@ public final class I2I {
   @Override
   public int hashCode() {
     return 31 + Arrays.hashCode(entries);
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder buf = new StringBuilder("ii{");
+    for (int n = nextNonNullEntryIndex(0); n != -1;) {
+      buf.append(n).append(" ").append(entries[n].v);
+      n = nextNonNullEntryIndex(n + 1);
+      if (n != -1) {
+        buf.append(", ");
+      }
+    }
+    return buf.append("}").toString();
+  }
+
+  private int nextNonNullEntryIndex(int fromIndex) {
+    for (int n = fromIndex, end = range(); n < end; n++) {
+      if (!entries[n].isNull) {
+        return n;
+      }
+    }
+    return -1;
   }
 
   @Override
@@ -103,14 +125,14 @@ public final class I2I {
 
     boolean isNull = true;
 
-    int n;
+    int v;
 
     Entry() {
     }
 
     @Override
     public int hashCode() {
-      return isNull ? 1231 : 1237 + n;
+      return isNull ? 1231 : 1237 + v;
     }
 
     @Override
@@ -122,7 +144,7 @@ public final class I2I {
       if (getClass() != obj.getClass())
         return false;
       Entry other = (Entry) obj;
-      return isNull ? other.isNull : !other.isNull && n == other.n;
+      return isNull ? other.isNull : !other.isNull && v == other.v;
     }
 
   }

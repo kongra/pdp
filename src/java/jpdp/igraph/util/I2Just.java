@@ -94,6 +94,28 @@ public class I2Just<T> {
     return Arrays.equals(entries, other.entries);
   }
 
+  @Override
+  public String toString() {
+    StringBuilder buf = new StringBuilder("i{");
+    for (int n = nextNonNullEntryIndex(0); n != -1;) {
+      buf.append(n).append(" ").append(entries[n]);
+      n = nextNonNullEntryIndex(n + 1);
+      if (n != -1) {
+        buf.append(", ");
+      }
+    }
+    return buf.append("}").toString();
+  }
+
+  private int nextNonNullEntryIndex(int fromIndex) {
+    for (int n = fromIndex, end = range(); n < end; n++) {
+      if (null != entries[n]) {
+        return n;
+      }
+    }
+    return -1;
+  }
+
   private final Object[] entries;
 
 }
