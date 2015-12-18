@@ -2,7 +2,7 @@
 ;; Created 2015-12-18
 
 (ns pdp.igraph.iset
-  (:refer-clojure :exclude [empty? contains? remove range])
+  (:refer-clojure :exclude [contains? empty? range])
   (:gen-class))
 
 
@@ -32,19 +32,19 @@
   (.contains s n))
 
 
-(defn add
+(defn add!
   {:inline (fn [s n] `(.add ~s ~n))}
   [^jpdp.igraph.util.ISet s n]
   (.add s n))
 
 
-(defn remove
+(defn remove!
   {:inline (fn [s n] `(.remove ~s ~n))}
   [^jpdp.igraph.util.ISet s n]
   (.remove s n))
 
 
-(defn clear
+(defn clear!
   {:inline (fn [s] `(.clear s))}
   [^jpdp.igraph.util.ISet s]
   (.clear s))
