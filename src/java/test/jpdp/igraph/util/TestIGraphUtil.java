@@ -11,12 +11,12 @@ public class TestIGraphUtil {
 
   public static void main(String[] args) {
     // test1();
-    // test2();
+    test2();
 
   }
 
   private static void test2() {
-    I2I m = new I2I(10);
+    I2I m = new I2I(10, -1);
     System.out.println(m);
 
     m.put(1, 2);

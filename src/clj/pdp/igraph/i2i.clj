@@ -7,8 +7,8 @@
 
 
 (defn ^jpdp.igraph.util.I2I make
-  [range]
-  (jpdp.igraph.util.I2I. range))
+  [range noval]
+  (jpdp.igraph.util.I2I. range noval))
 
 
 (defn range
@@ -42,12 +42,6 @@
   {:inline (fn [m n] `(.get ~m ~n))}
   [^jpdp.igraph.util.I2I m n]
   (.get m n))
-
-
-(defn safe-get
-  {:inline (fn [m n deflt] `(.safeGet ~m ~n ~deflt))}
-  [^jpdp.igraph.util.I2I m n deflt]
-  (.safeGet m n deflt))
 
 
 (defn put!

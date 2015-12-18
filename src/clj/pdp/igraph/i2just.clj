@@ -44,12 +44,6 @@
   (.get m n))
 
 
-(defn safe-get
-  {:inline (fn [m n deflt] `(.safeGet ~m ~n ~deflt))}
-  [^jpdp.igraph.util.I2Just m n deflt]
-  (.safeGet m n deflt))
-
-
 (defn put!
   {:inline (fn [m n v] `(.put ~m ~n ~v))}
   [^jpdp.igraph.util.I2Just m n v]

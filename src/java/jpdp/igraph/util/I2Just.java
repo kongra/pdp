@@ -50,17 +50,7 @@ public class I2Just<T> {
 
   @SuppressWarnings("unchecked")
   public T get(int n) {
-    final Object e = entries[n];
-    if (null == e) {
-      throw new IllegalStateException("No value for key " + n);
-    }
-    return (T) e;
-  }
-
-  @SuppressWarnings("unchecked")
-  public T safeGet(int n, T deflt) {
-    final Object e = entries[n];
-    return (T) (null == e ? deflt : e);
+    return (T) entries[n];
   }
 
   public void put(int n, T v) {
