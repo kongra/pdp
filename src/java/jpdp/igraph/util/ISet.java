@@ -10,7 +10,12 @@ public final class ISet {
 
   public ISet(int range) {
     this.entries = new BitSet(range);
+    this.range = range;
   }
+
+	public int range() {
+		return range;
+	}
 
   public int size() {
     return entries.cardinality();
@@ -54,5 +59,7 @@ public final class ISet {
   }
 
   private final BitSet entries;
+
+	private final int range;
 
 }
