@@ -61,9 +61,10 @@ abstract class AbstractGraph implements IGraph, IMutableGraph {
   }
 
   @Override
-  public synchronized void addVertex(int v) {
+  public synchronized IMutableGraph addVertex(int v) {
     validateV(this, v);
     vs.set(v);
+    return this;
   }
 
   AbstractGraph(int range) {

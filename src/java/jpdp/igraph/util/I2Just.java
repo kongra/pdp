@@ -53,18 +53,21 @@ public class I2Just<T> {
     return (T) entries[n];
   }
 
-  public void put(int n, T v) {
+  public I2Just put(int n, T v) {
     entries[n] = v;
+    return this;
   }
 
-  public void remove(int n) {
+  public I2Just remove(int n) {
     entries[n] = null;
+    return this;
   }
 
-  public void clear() {
+  public I2Just clear() {
     for (int i = 0, n = range(); i < n; i++) {
       remove(i);
     }
+    return this;
   }
 
   @Override

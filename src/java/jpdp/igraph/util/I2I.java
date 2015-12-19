@@ -54,18 +54,21 @@ public final class I2I {
     return entries[n];
   }
 
-  public void put(int n, int v) {
+  public I2I put(int n, int v) {
     entries[n] = v;
+    return this;
   }
 
-  public void remove(int n) {
+  public I2I remove(int n) {
     put(n, noValue);
+    return this;
   }
 
-  public void clear() {
+  public I2I clear() {
     for (int i = 0, n = range(); i < n; i++) {
       remove(i);
     }
+    return this;
   }
 
   @Override

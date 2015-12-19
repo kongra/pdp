@@ -33,11 +33,7 @@ public final class Edge {
     if (getClass() != obj.getClass())
       return false;
     Edge other = (Edge) obj;
-    if (v1 != other.v1)
-      return false;
-    if (v2 != other.v2)
-      return false;
-    return true;
+    return v1 == other.v1 && v2 == other.v2;
   }
 
   @Override

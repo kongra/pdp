@@ -29,16 +29,19 @@ public final class ISet {
     return entries.get(n);
   }
 
-  public void add(int n) {
+  public ISet add(int n) {
     entries.set(n);
+    return this;
   }
 
-  public void remove(int n) {
+  public ISet remove(int n) {
     entries.set(n, false);
+    return this;
   }
 
-  public void clear() {
+  public ISet clear() {
     entries.clear();
+    return this;
   }
 
   @Override

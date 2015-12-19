@@ -6,12 +6,12 @@ package jpdp.igraph;
 
 public interface IMutableGraph {
 
-  void addVertex(int v);
+  IMutableGraph addVertex(int v);
 
-  void removeVertex(int v);
+  IMutableGraph removeVertex(int v);
 
-  void addEdge(int v1, int v2);
+  IMutableGraph addEdge(int v1, int v2);
 
-  void removeEdge(int v1, int v2);
+  IMutableGraph removeEdge(int v1, int v2);
 
 }

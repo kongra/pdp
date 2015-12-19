@@ -16,7 +16,7 @@ public final class Unigraph extends AbstractGraph {
   }
 
   @Override
-  public synchronized void removeVertex(int v) {
+  public synchronized IMutableGraph removeVertex(int v) {
     validateV(this, v);
 
     // Remove adjacency for all successors
@@ -30,10 +30,11 @@ public final class Unigraph extends AbstractGraph {
 
     // Bye vertices!
     super.vs.set(v, false);
+    return this;
   }
 
   @Override
-  public synchronized void addEdge(int v1, int v2) {
+  public synchronized IMutableGraph addEdge(int v1, int v2) {
     validateV(this, v1);
     validateV(this, v2);
 
@@ -44,16 +45,20 @@ public final class Unigraph extends AbstractGraph {
     // Make bidirectional adjacency
     super.adjs[v1].set(v2);
     super.adjs[v2].set(v1);
+
+    return this;
   }
 
   @Override
-  public synchronized void removeEdge(int v1, int v2) {
+  public synchronized IMutableGraph removeEdge(int v1, int v2) {
     validateV(this, v1);
     validateV(this, v2);
 
     // Remove bidirectional adjacency
     super.adjs[v1].set(v2, false);
     super.adjs[v2].set(v1, false);
+
+    return this;
   }
 
   @Override
