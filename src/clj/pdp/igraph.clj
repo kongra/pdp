@@ -3,7 +3,9 @@
 
 (ns pdp.igraph
   (:refer-clojure :exclude [range empty?])
-  (:use [clongra.core])
+  (:use    [clongra.core])
+  (:import [jpdp.igraph IGraph   IDigraph IMutableGraph
+                        Unigraph Digraph  Edge])
   (:gen-class))
 
 ;; FAST MUTABLE UNWEIGHTED GRAPHS WITH INTEGRAL VERTICES IN RANGE
@@ -11,59 +13,59 @@
 
 ;; CONSTRUCTORS
 
-(defn ^jpdp.igraph.Unigraph unigraph
+(defn ^Unigraph unigraph
   [range]
-  (jpdp.igraph.Unigraph. range))
+  (Unigraph. range))
 
 
-(defn ^jpdp.igraph.Digraph digraph
+(defn ^Digraph digraph
   [range]
-  (jpdp.igraph.Digraph. range))
+  (Digraph. range))
 
 
 ;; COMMON READS
 
 (defn range
-  [^jpdp.igraph.IGraph g]
+  [^IGraph g]
   (.range g))
 
 
 (defn vertices-count
-  [^jpdp.igraph.IGraph g]
+  [^IGraph g]
   (.verticesCount g))
 
 
 (defn empty?
-  [^jpdp.igraph.IGraph g]
+  [^IGraph g]
   (.isEmpty g))
 
 
 (defn vertices
   {:inline (fn [g] `(.vertices ~g))}
-  [^jpdp.igraph.IGraph g]
+  [^IGraph g]
   (.vertices g))
 
 
 (defn has-vertex?
   {:inline (fn [g v] `(.hasVertex ~g ~v))}
-  [^jpdp.igraph.IGraph g v]
+  [^IGraph g v]
   (.hasVertex g v))
 
 
 (defn has-edge?
   {:inline (fn [g v1 v2] `(.hasEdge ~g ~v1 ~v2))}
-  [^jpdp.igraph.IGraph g v1 v2]
+  [^IGraph g v1 v2]
   (.hasEdge g v1 v2))
 
 
 (defn successors
   {:inline (fn [g v] `(.successors ~g ~v))}
-  [^jpdp.igraph.IGraph g v]
+  [^IGraph g v]
   (.successors g v))
 
 
-(defn ^jpdp.igraph.IGraph clone
-  [^jpdp.igraph.IGraph g]
+(defn ^IGraph clone
+  [^IGraph g]
   (.cloneme g))
 
 
@@ -71,7 +73,7 @@
 
 (defn predecessors
   {:inline (fn [g v] `(.predecessors ~g ~v))}
-  [^jpdp.igraph.IDigraph g v]
+  [^IDigraph g v]
   (.predecessors g v))
 
 
@@ -79,25 +81,25 @@
 
 (defn add-vertex!
   {:inline (fn [g v] `(.addVertex ~g ~v))}
-  [^jpdp.igraph.IMutableGraph g v]
+  [^IMutableGraph g v]
   (.addVertex g v))
 
 
 (defn remove-vertex!
   {:inline (fn [g v] `(.removeVertex ~g ~v))}
-  [^jpdp.igraph.IMutableGraph g v]
+  [^IMutableGraph g v]
   (.removeVertex g v))
 
 
 (defn add-edge!
   {:inline (fn [g v1 v2] `(.addEdge ~g ~v1 ~v2))}
-  [^jpdp.igraph.IMutableGraph g v1 v2]
+  [^IMutableGraph g v1 v2]
   (.addEdge g v1 v2))
 
 
 (defn remove-edge!
   {:inline (fn [g v1 v2] `(.removeEdge ~g ~v1 ~v2))}
-  [^jpdp.igraph.IMutableGraph g v1 v2]
+  [^IMutableGraph g v1 v2]
   (.removeEdge g v1 v2))
 
 
@@ -105,32 +107,32 @@
 
 (defn ev1
   {:inline (fn [e] `(.v1 ~e))}
-  [^jpdp.igraph.Edge e]
+  [^Edge e]
   (.v1 e))
 
 
 (defn ev2
   {:inline (fn [e] `(.v2 ~e))}
-  [^jpdp.igraph.Edge e]
+  [^Edge e]
   (.v2 e))
 
 
 (defn successor-edges
   {:inline (fn [g v] `(.successorEdges ~g ~v))}
-  [^jpdp.igraph.IGraph g v]
+  [^IGraph g v]
   (.successorEdges g v))
 
 
 (defn predecessor-edges
   {:inline (fn [g v] `(.predecessorEdges ~g ~v))}
-  [^jpdp.igraph.IDigraph g v]
+  [^IDigraph g v]
   (.predecessorEdges g v))
 
 
 ;; DUMP/PRESENTATION
 
 (defn adjacent
-  [^jpdp.igraph.IGraph g]
+  [^IGraph g]
   (fn [v] (seq (successors g v))))
 
 
@@ -156,7 +158,7 @@
 ;;         (add-edge! ug v1 v2)))
 ;;     ug))
 
-;; (def ^jpdp.igraph.IGraph g (fc-unigraph 100))
+;; (def ^IGraph g (fc-unigraph 100))
 
 ;; (dotimes [i 20] (add-vertex! ug i))
 ;; (def mapka (apply hash-map (take 200 (N))))
