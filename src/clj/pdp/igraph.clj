@@ -91,3 +91,11 @@
   {:inline (fn [e] `(.v2 ~e))}
   [^Edge e]
   (.v2 e))
+
+
+;; VERTICES
+
+(defn ^longs vs
+  "A simple constructor of vertices array."
+  [& coll]
+  (long-array coll))

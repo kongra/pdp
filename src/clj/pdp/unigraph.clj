@@ -13,7 +13,7 @@
 
 ;; UNDIRECTED GRAPHS
 
-(defn ^IUnigraph make-unigraph [range] (Unigraph. range))
+(defn ^Unigraph make-unigraph [range] (Unigraph. range))
 
 (defn ^longs neighbors
   {:inline (fn [ug v] `(.neighbors ~ug ~v))}
@@ -24,7 +24,7 @@
 (defn neighbor-edges
   {:inline (fn [ug v] `(.neighborEdges ~ug ~v))}
   [^IUnigraph ug ^long v]
-  (.neighborEdges ug v))
+  (.neighborEdges ug v) )
 
 
 ;; DUMP/PRESENTATION
@@ -47,4 +47,4 @@
 
 ;; MORE TO COME ...
 
-(load "unigraph/commalg")
+(load "unigraph/clique")
