@@ -2,7 +2,10 @@
 ;; Created 2015-12-21
 
 (ns pdp.unigraph
-  (:require [pdp.igraph :as g])
+  (:require [clongra.oloops  :as oloo]
+            [clongra.locrefs :as lr]
+            [pdp.igraph      :as g]
+            [primitive-math  :as p])
   (:use     [clongra.core])
   (:import  [jpdp.igraph IUnigraph Unigraph])
   (:gen-class))
