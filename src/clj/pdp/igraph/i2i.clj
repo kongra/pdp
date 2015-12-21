@@ -12,13 +12,13 @@
   (I2I. range noval))
 
 
-(defn range
+(defn ^long range
   {:inline (fn [m] `(.range ~m))}
   [^I2I m]
   (.range m))
 
 
-(defn size
+(defn ^long size
   {:inline (fn [m] `(.size ~m))}
   [^I2I m]
   (.size m))
@@ -32,31 +32,31 @@
 
 (defn contains-key?
   {:inline (fn [m n] `(.containsKey ~m ~n))}
-  [^I2I m n]
+  [^I2I m ^long n]
   (.containsKey m n))
 
 
 (defn contains-val?
   {:inline (fn [m v] `(.containsValue ~m ~v))}
-  [^I2I m v]
+  [^I2I m ^long v]
   (.containsValue m v))
 
 
-(defn get
+(defn ^long get
   {:inline (fn [m n] `(.get ~m ~n))}
-  [^I2I m n]
+  [^I2I m ^long n]
   (.get m n))
 
 
 (defn put!
   {:inline (fn [m n v] `(.put ~m ~n ~v))}
-  [^I2I m n v]
+  [^I2I m ^long n ^long v]
   (.put m n v))
 
 
 (defn remove!
   {:inline (fn [m n] `(.remove ~m ~n))}
-  [^I2I m n]
+  [^I2I m ^long n]
   (.remove m n))
 
 

@@ -6,11 +6,11 @@ package jpdp.igraph;
 
 public final class Edge {
 
-  public final int v1;
+  public final long v1;
 
-  public final int v2;
+  public final long v2;
 
-  public Edge(int v1, int v2) {
+  public Edge(long v1, long v2) {
     this.v1 = v1;
     this.v2 = v2;
   }
@@ -19,8 +19,8 @@ public final class Edge {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + v1;
-    result = prime * result + v2;
+    result = prime * result + (int) (v1 ^ (v1 >>> 32));
+    result = prime * result + (int) (v2 ^ (v2 >>> 32));
     return result;
   }
 

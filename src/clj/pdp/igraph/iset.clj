@@ -12,13 +12,13 @@
   (ISet. range))
 
 
-(defn range
+(defn ^long range
   {:inline (fn [s] `(.range ~s))}
   [^ISet s]
   (.range s))
 
 
-(defn size
+(defn ^long size
   {:inline (fn [s] `(.size ~s))}
   [^ISet s]
   (.size s))
@@ -32,19 +32,19 @@
 
 (defn contains?
   {:inline (fn [s n] `(.contains ~s ~n))}
-  [^ISet s n]
+  [^ISet s ^long n]
   (.contains s n))
 
 
 (defn add!
   {:inline (fn [s n] `(.add ~s ~n))}
-  [^ISet s n]
+  [^ISet s ^long n]
   (.add s n))
 
 
 (defn remove!
   {:inline (fn [s n] `(.remove ~s ~n))}
-  [^ISet s n]
+  [^ISet s ^long n]
   (.remove s n))
 
 

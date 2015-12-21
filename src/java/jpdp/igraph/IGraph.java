@@ -6,17 +6,17 @@ package jpdp.igraph;
 
 public interface IGraph {
 
-  int range();
+  long range();
 
-  int[] vertices();
+  long[] vertices();
 
-  int verticesCount();
+  long verticesCount();
 
   boolean isEmpty();
 
-  boolean hasVertex(int v);
+  boolean hasVertex(long v);
 
-  boolean hasEdge(int v1, int v2);
+  boolean hasEdge(long v1, long v2);
 
   public IGraph cloneme();
 

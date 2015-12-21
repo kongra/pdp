@@ -6,8 +6,8 @@ package jpdp.igraph;
 
 public interface IUnigraph {
 
-  int[] neighbors(int v);
+  long[] neighbors(long v);
 
-  Edge[] neighborEdges(int v);
+  Edge[] neighborEdges(long v);
 
 }

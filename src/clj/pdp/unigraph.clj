@@ -2,8 +2,9 @@
 ;; Created 2015-12-21
 
 (ns pdp.unigraph
-  (:use    [clongra.core])
-  (:import [jpdp.igraph IUnigraph Unigraph])
+  (:require [pdp.igraph :as g])
+  (:use     [clongra.core])
+  (:import  [jpdp.igraph IUnigraph Unigraph])
   (:gen-class))
 
 
@@ -11,15 +12,15 @@
 
 (defn ^IUnigraph make-unigraph [range] (Unigraph. range))
 
-(defn neighbors
+(defn ^longs neighbors
   {:inline (fn [ug v] `(.neighbors ~ug ~v))}
-  [^IUnigraph ug v]
+  [^IUnigraph ug ^long v]
   (.neighbors ug v))
 
 
 (defn neighbor-edges
   {:inline (fn [ug v] `(.neighborEdges ~ug ~v))}
-  [^IUnigraph ug v]
+  [^IUnigraph ug ^long v]
   (.neighborEdges ug v))
 
 
@@ -39,3 +40,8 @@
 
   ([ug v]
    (print-graph v (adjacent ug))))
+
+
+;; MORE TO COME ...
+
+(load "unigraph/commalg")

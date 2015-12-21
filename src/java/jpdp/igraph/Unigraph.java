@@ -12,18 +12,18 @@ import java.util.BitSet;
 
 public final class Unigraph extends AbstractGraph implements IUnigraph {
 
-  public Unigraph(int range) {
-    this(new BitSet(range), makeAdjs(range));
+  public Unigraph(long range) {
+    this(new BitSet((int) range), makeAdjs(range));
   }
 
   @Override
-  public synchronized int[] neighbors(int v) {
-    return bitsOn3(adjs[v]);
+  public synchronized long[] neighbors(long v) {
+    return bitsOn3(adjs[(int) v]);
   }
 
   @Override
-  public synchronized Edge[] neighborEdges(int v) {
-    final BitSet bs = adjs[v];
+  public synchronized Edge[] neighborEdges(long v) {
+    final BitSet bs = adjs[(int) v];
     final int N = bs.cardinality();
     final Edge[] edges = new Edge[N];
     int v2 = bs.nextSetBit(0);
@@ -35,47 +35,47 @@ public final class Unigraph extends AbstractGraph implements IUnigraph {
   }
 
   @Override
-  public synchronized IMutableGraph removeVertex(int v) {
+  public synchronized IMutableGraph removeVertex(long v) {
     validateV(this, v);
 
     // Remove adjacency for all successors
-    final BitSet succs = adjs[v];
+    final BitSet succs = adjs[(int) v];
     for (int s = succs.nextSetBit(0); s != -1; s = succs.nextSetBit(s + 1)) {
-      adjs[s].set(v, false);
+      adjs[s].set((int) v, false);
     }
 
     // Remove adjacency to all successors
     succs.clear();
 
     // Bye vertices!
-    vs.set(v, false);
+    vs.set((int) v, false);
     return this;
   }
 
   @Override
-  public synchronized IMutableGraph addEdge(int v1, int v2) {
+  public synchronized IMutableGraph addEdge(long v1, long v2) {
     validateV(this, v1);
     validateV(this, v2);
 
     // Add both to the vertex set (they may be already present)
-    vs.set(v1);
-    vs.set(v2);
+    vs.set((int) v1);
+    vs.set((int) v2);
 
     // Make bidirectional adjacency
-    adjs[v1].set(v2);
-    adjs[v2].set(v1);
+    adjs[(int) v1].set((int) v2);
+    adjs[(int) v2].set((int) v1);
 
     return this;
   }
 
   @Override
-  public synchronized IMutableGraph removeEdge(int v1, int v2) {
+  public synchronized IMutableGraph removeEdge(long v1, long v2) {
     validateV(this, v1);
     validateV(this, v2);
 
     // Remove bidirectional adjacency
-    adjs[v1].set(v2, false);
-    adjs[v2].set(v1, false);
+    adjs[(int) v1].set((int) v2, false);
+    adjs[(int) v2].set((int) v1, false);
 
     return this;
   }

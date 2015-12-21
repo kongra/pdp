@@ -12,18 +12,18 @@ import java.util.BitSet;
 
 public final class Digraph extends AbstractGraph implements IDigraph {
 
-  public Digraph(int range) {
-    this(new BitSet(range), makeAdjs(range), makeAdjs(range));
+  public Digraph(long range) {
+    this(new BitSet((int) range), makeAdjs(range), makeAdjs(range));
   }
 
   @Override
-  public synchronized int[] predecessors(int v) {
-    return bitsOn3(ins[v]);
+  public synchronized long[] predecessors(long v) {
+    return bitsOn3(ins[(int) v]);
   }
 
   @Override
-  public Edge[] predecessorEdges(int v) {
-    final BitSet bs = ins[v];
+  public Edge[] predecessorEdges(long v) {
+    final BitSet bs = ins[(int) v];
     final int N = bs.cardinality();
     final Edge[] edges = new Edge[N];
     int v2 = bs.nextSetBit(0);
@@ -35,13 +35,13 @@ public final class Digraph extends AbstractGraph implements IDigraph {
   }
 
   @Override
-  public synchronized int[] successors(int v) {
-    return bitsOn3(adjs[v]);
+  public synchronized long[] successors(long v) {
+    return bitsOn3(adjs[(int) v]);
   }
 
   @Override
-  public synchronized Edge[] successorEdges(int v) {
-    final BitSet bs = adjs[v];
+  public synchronized Edge[] successorEdges(long v) {
+    final BitSet bs = adjs[(int) v];
     final int N = bs.cardinality();
     final Edge[] edges = new Edge[N];
     int v2 = bs.nextSetBit(0);
@@ -53,54 +53,54 @@ public final class Digraph extends AbstractGraph implements IDigraph {
   }
 
   @Override
-  public synchronized IMutableGraph removeVertex(int v) {
+  public synchronized IMutableGraph removeVertex(long v) {
     validateV(this, v);
 
     // Remove adjacency for all predecessors
-    final BitSet preds = ins[v];
+    final BitSet preds = ins[(int) v];
     for (int p = preds.nextSetBit(0); p != -1; p = preds.nextSetBit(p + 1)) {
-      adjs[p].set(v, false);
+      adjs[p].set((int) v, false);
     }
 
     // Remove ins for all successors
-    final BitSet succs = adjs[v];
+    final BitSet succs = adjs[(int) v];
     for (int s = succs.nextSetBit(0); s != -1; s = succs.nextSetBit(s + 1)) {
-      ins[s].set(v, false);
+      ins[s].set((int) v, false);
     }
 
     // Remove adjacency to all successors
-    adjs[v].clear();
+    adjs[(int) v].clear();
 
     // Bye vertices!
-    vs.set(v, false);
+    vs.set((int) v, false);
 
     return this;
   }
 
   @Override
-  public synchronized IMutableGraph addEdge(int v1, int v2) {
+  public synchronized IMutableGraph addEdge(long v1, long v2) {
     validateV(this, v1);
     validateV(this, v2);
 
     // Add both to the vertex set (may be already present)
-    vs.set(v1);
-    vs.set(v2);
+    vs.set((int) v1);
+    vs.set((int) v2);
 
     // Make unidirectional adjacency
-    adjs[v1].set(v2);
-    ins[v2].set(v1);
+    adjs[(int) v1].set((int) v2);
+    ins[(int) v2].set((int) v1);
 
     return this;
   }
 
   @Override
-  public synchronized IMutableGraph removeEdge(int v1, int v2) {
+  public synchronized IMutableGraph removeEdge(long v1, long v2) {
     validateV(this, v1);
     validateV(this, v2);
 
     // Remove unidirectional adjacency
-    adjs[v1].set(v2, false);
-    ins[v2].set(v1, false);
+    adjs[(int) v1].set((int) v2, false);
+    ins[(int) v2].set((int) v1, false);
 
     return this;
   }

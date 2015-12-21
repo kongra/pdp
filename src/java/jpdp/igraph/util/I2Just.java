@@ -8,16 +8,16 @@ import java.util.Arrays;
 
 public class I2Just<T> {
 
-  public I2Just(int range) {
-    entries = new Object[range];
+  public I2Just(long range) {
+    entries = new Object[(int) range];
   }
 
-  public int range() {
+  public long range() {
     return entries.length;
   }
 
-  public int size() {
-    int s = 0;
+  public long size() {
+    long s = 0;
     for (Object e : entries) {
       if (null != e) {
         s += 1;
@@ -35,8 +35,8 @@ public class I2Just<T> {
     return true;
   }
 
-  public boolean containsKey(int n) {
-    return entries[n] != null;
+  public boolean containsKey(long n) {
+    return entries[(int) n] != null;
   }
 
   public boolean containsValue(Object v) {
@@ -49,22 +49,22 @@ public class I2Just<T> {
   }
 
   @SuppressWarnings("unchecked")
-  public T get(int n) {
-    return (T) entries[n];
+  public T get(long n) {
+    return (T) entries[(int) n];
   }
 
-  public I2Just put(int n, T v) {
-    entries[n] = v;
+  public I2Just put(long n, T v) {
+    entries[(int) n] = v;
     return this;
   }
 
-  public I2Just remove(int n) {
-    entries[n] = null;
+  public I2Just remove(long n) {
+    entries[(int) n] = null;
     return this;
   }
 
   public I2Just clear() {
-    for (int i = 0, n = range(); i < n; i++) {
+    for (long i = 0, end = range(); i < end; i++) {
       remove(i);
     }
     return this;
@@ -90,8 +90,8 @@ public class I2Just<T> {
   @Override
   public String toString() {
     StringBuilder buf = new StringBuilder("i{");
-    for (int n = nextNonNullEntryIndex(0); n != -1;) {
-      buf.append(n).append(" ").append(entries[n]);
+    for (long n = nextNonNullEntryIndex(0); n != -1;) {
+      buf.append(n).append(" ").append(entries[(int) n]);
       n = nextNonNullEntryIndex(n + 1);
       if (n != -1) {
         buf.append(", ");
@@ -100,9 +100,9 @@ public class I2Just<T> {
     return buf.append("}").toString();
   }
 
-  private int nextNonNullEntryIndex(int fromIndex) {
-    for (int n = fromIndex, end = range(); n < end; n++) {
-      if (null != entries[n]) {
+  private long nextNonNullEntryIndex(long fromIndex) {
+    for (long n = fromIndex, end = range(); n < end; n++) {
+      if (null != entries[(int) n]) {
         return n;
       }
     }

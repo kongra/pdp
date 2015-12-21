@@ -13,12 +13,12 @@ import java.util.BitSet;
 abstract class AbstractGraph implements IGraph, IMutableGraph {
 
   @Override
-  public int range() { // No need to synchronize, adjs.length is final
+  public long range() { // No need to synchronize, adjs.length is final
     return adjs.length;
   }
 
   @Override
-  public synchronized int verticesCount() {
+  public synchronized long verticesCount() {
     return vs.cardinality();
   }
 
@@ -28,29 +28,29 @@ abstract class AbstractGraph implements IGraph, IMutableGraph {
   }
 
   @Override
-  public synchronized int[] vertices() {
+  public synchronized long[] vertices() {
     return bitsOn3(vs);
   }
 
   @Override
-  public synchronized boolean hasVertex(int v) {
-    return vs.get(v);
+  public synchronized boolean hasVertex(long v) {
+    return vs.get((int) v);
   }
 
   @Override
-  public synchronized boolean hasEdge(int v1, int v2) {
-    return adjs[v1].get(v2);
+  public synchronized boolean hasEdge(long v1, long v2) {
+    return adjs[(int) v1].get((int) v2);
   }
 
   @Override
-  public synchronized IMutableGraph addVertex(int v) {
+  public synchronized IMutableGraph addVertex(long v) {
     validateV(this, v);
-    vs.set(v);
+    vs.set((int) v);
     return this;
   }
 
-  AbstractGraph(int range) {
-    this(new BitSet(range), makeAdjs(range));
+  AbstractGraph(long range) {
+    this(new BitSet((int) range), makeAdjs(range));
   }
 
   AbstractGraph(BitSet vs, BitSet[] adjs) {

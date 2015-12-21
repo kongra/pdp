@@ -11,27 +11,27 @@
 
 (defn ^IDigraph make-digraph [range] (Digraph. range))
 
-(defn successors
+(defn ^longs successors
   {:inline (fn [dg v] `(.successors ~dg ~v))}
-  [^IDigraph dg v]
+  [^IDigraph dg ^long v]
   (.successors dg v))
 
 
 (defn successor-edges
   {:inline (fn [dg v] `(.successorEdges ~dg ~v))}
-  [^IDigraph dg v]
+  [^IDigraph dg ^long v]
   (.successorEdges dg v))
 
 
-(defn predecessors
+(defn ^longs predecessors
   {:inline (fn [dg v] `(.predecessors ~dg ~v))}
-  [^IDigraph dg v]
+  [^IDigraph dg ^long v]
   (.predecessors dg v))
 
 
 (defn predecessor-edges
   {:inline (fn [dg v] `(.predecessorEdges ~dg ~v))}
-  [^IDigraph dg v]
+  [^IDigraph dg ^long v]
   (.predecessorEdges dg v))
 
 

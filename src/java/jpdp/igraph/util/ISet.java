@@ -8,16 +8,16 @@ import java.util.BitSet;
 
 public final class ISet {
 
-  public ISet(int range) {
-    this.entries = new BitSet(range);
+  public ISet(long range) {
+    this.entries = new BitSet((int) range);
     this.range = range;
   }
 
-  public int range() {
+  public long range() {
     return range;
   }
 
-  public int size() {
+  public long size() {
     return entries.cardinality();
   }
 
@@ -25,17 +25,17 @@ public final class ISet {
     return size() == 0;
   }
 
-  public boolean contains(int n) {
-    return entries.get(n);
+  public boolean contains(long n) {
+    return entries.get((int) n);
   }
 
-  public ISet add(int n) {
-    entries.set(n);
+  public ISet add(long n) {
+    entries.set((int) n);
     return this;
   }
 
-  public ISet remove(int n) {
-    entries.set(n, false);
+  public ISet remove(long n) {
+    entries.set((int) n, false);
     return this;
   }
 
@@ -64,9 +64,9 @@ public final class ISet {
   @Override
   public String toString() {
     StringBuilder buf = new StringBuilder("#i{");
-    for (int n = entries.nextSetBit(0); n != -1;) {
+    for (long n = entries.nextSetBit(0); n != -1;) {
       buf.append(n);
-      n = entries.nextSetBit(n + 1);
+      n = entries.nextSetBit((int) (n + 1));
       if (n != -1) {
         buf.append(" ");
       }
@@ -76,6 +76,6 @@ public final class ISet {
 
   private final BitSet entries;
 
-  private final int range;
+  private final long range;
 
 }

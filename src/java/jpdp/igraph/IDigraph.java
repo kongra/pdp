@@ -6,12 +6,12 @@ package jpdp.igraph;
 
 public interface IDigraph {
 
-  int[] successors(int v);
+  long[] successors(long v);
 
-  Edge[] successorEdges(int v);
+  Edge[] successorEdges(long v);
 
-  int[] predecessors(int v);
+  long[] predecessors(long v);
 
-  Edge[] predecessorEdges(int v);
+  Edge[] predecessorEdges(long v);
 
 }

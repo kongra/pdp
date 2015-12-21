@@ -12,19 +12,19 @@
 
 ;; COMMON NON-DESTRUCTIVE OPERATORS
 
-(defn range
+(defn ^long range
   {:inline (fn [g] `(.range ~g))}
   [^IGraph g]
   (.range g))
 
 
-(defn vertices
+(defn ^longs vertices
   {:inline (fn [g] `(.vertices ~g))}
   [^IGraph g]
   (.vertices g))
 
 
-(defn vertices-count
+(defn ^long vertices-count
   {:inline (fn [g] `(.verticesCount ~g))}
   [^IGraph g]
   (.verticesCount g))
@@ -38,13 +38,13 @@
 
 (defn has-vertex?
   {:inline (fn [g v] `(.hasVertex ~g ~v))}
-  [^IGraph g v]
+  [^IGraph g ^long v]
   (.hasVertex g v))
 
 
 (defn has-edge?
   {:inline (fn [g v1 v2] `(.hasEdge ~g ~v1 ~v2))}
-  [^IGraph g v1 v2]
+  [^IGraph g ^long v1 ^long v2]
   (.hasEdge g v1 v2))
 
 
@@ -57,37 +57,37 @@
 
 (defn add-vertex!
   {:inline (fn [g v] `(.addVertex ~g ~v))}
-  [^IMutableGraph g v]
+  [^IMutableGraph g ^long v]
   (.addVertex g v))
 
 
 (defn remove-vertex!
   {:inline (fn [g v] `(.removeVertex ~g ~v))}
-  [^IMutableGraph g v]
+  [^IMutableGraph g ^long v]
   (.removeVertex g v))
 
 
 (defn add-edge!
   {:inline (fn [g v1 v2] `(.addEdge ~g ~v1 ~v2))}
-  [^IMutableGraph g v1 v2]
+  [^IMutableGraph g ^long v1 ^long v2]
   (.addEdge g v1 v2))
 
 
 (defn remove-edge!
   {:inline (fn [g v1 v2] `(.removeEdge ~g ~v1 ~v2))}
-  [^IMutableGraph g v1 v2]
+  [^IMutableGraph g ^long v1 ^long v2]
   (.removeEdge g v1 v2))
 
 
 ;; EDGES
 
-(defn ev1
+(defn ^long ev1
   {:inline (fn [e] `(.v1 ~e))}
   [^Edge e]
   (.v1 e))
 
 
-(defn ev2
+(defn ^long ev2
   {:inline (fn [e] `(.v2 ~e))}
   [^Edge e]
   (.v2 e))

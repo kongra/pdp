@@ -8,19 +8,19 @@ import java.util.Arrays;
 
 public final class I2I {
 
-  public I2I(int range, int noValue) {
+  public I2I(long range, long noValue) {
     this.noValue = noValue;
-    this.entries = new int[range];
+    this.entries = new long[(int) range];
     clear();
   }
 
-  public int range() {
+  public long range() {
     return entries.length;
   }
 
-  public int size() {
-    int s = 0;
-    for (int e : entries) {
+  public long size() {
+    long s = 0;
+    for (long e : entries) {
       if (e != noValue) {
         s += 1;
       }
@@ -29,7 +29,7 @@ public final class I2I {
   }
 
   public boolean isEmpty() {
-    for (int e : entries) {
+    for (long e : entries) {
       if (e != noValue) {
         return false;
       }
@@ -37,12 +37,12 @@ public final class I2I {
     return true;
   }
 
-  public boolean containsKey(int n) {
-    return entries[n] != noValue;
+  public boolean containsKey(long n) {
+    return entries[(int) n] != noValue;
   }
 
-  public boolean containsValue(int v) {
-    for (int e : entries) {
+  public boolean containsValue(long v) {
+    for (long e : entries) {
       if (e == v) {
         return true;
       }
@@ -50,22 +50,22 @@ public final class I2I {
     return false;
   }
 
-  public int get(int n) {
-    return entries[n];
+  public long get(long n) {
+    return entries[(int) n];
   }
 
-  public I2I put(int n, int v) {
-    entries[n] = v;
+  public I2I put(long n, long v) {
+    entries[(int) n] = v;
     return this;
   }
 
-  public I2I remove(int n) {
+  public I2I remove(long n) {
     put(n, noValue);
     return this;
   }
 
   public I2I clear() {
-    for (int i = 0, n = range(); i < n; i++) {
+    for (long i = 0, n = range(); i < n; i++) {
       remove(i);
     }
     return this;
@@ -79,8 +79,8 @@ public final class I2I {
   @Override
   public String toString() {
     StringBuilder buf = new StringBuilder("ii{");
-    for (int n = nextNonNullEntryIndex(0); n != -1;) {
-      buf.append(n).append(" ").append(entries[n]);
+    for (long n = nextNonNullEntryIndex(0); n != -1;) {
+      buf.append(n).append(" ").append(entries[(int) n]);
       n = nextNonNullEntryIndex(n + 1);
       if (n != -1) {
         buf.append(", ");
@@ -89,9 +89,9 @@ public final class I2I {
     return buf.append("}").toString();
   }
 
-  private int nextNonNullEntryIndex(int fromIndex) {
-    for (int n = fromIndex, end = range(); n < end; n++) {
-      if (entries[n] != noValue) {
+  private long nextNonNullEntryIndex(long fromIndex) {
+    for (long n = fromIndex, end = range(); n < end; n++) {
+      if (entries[(int) n] != noValue) {
         return n;
       }
     }
@@ -110,8 +110,8 @@ public final class I2I {
     return Arrays.equals(entries, other.entries);
   }
 
-  private final int[] entries;
+  private final long[] entries;
 
-  private final int noValue;
+  private final long noValue;
 
 }
