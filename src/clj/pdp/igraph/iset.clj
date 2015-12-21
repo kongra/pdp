@@ -13,16 +13,19 @@
 
 
 (defn range
+  {:inline (fn [s] `(.range ~s))}
   [^ISet s]
   (.range s))
 
 
 (defn size
+  {:inline (fn [s] `(.size ~s))}
   [^ISet s]
   (.size s))
 
 
 (defn empty?
+  {:inline (fn [s] `(.isEmpty ~s))}
   [^ISet s]
   (.isEmpty s))
 

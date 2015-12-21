@@ -4,15 +4,34 @@
  */
 package jpdp.igraph;
 
-import static jpdp.igraph.IGraphTools.makeAdjs;
-import static jpdp.igraph.IGraphTools.validateV;
+import static jpdp.igraph.Tools.bitsOn3;
+import static jpdp.igraph.Tools.makeAdjs;
+import static jpdp.igraph.Tools.validateV;
 
 import java.util.BitSet;
 
-public final class Unigraph extends AbstractGraph {
+public final class Unigraph extends AbstractGraph implements IUnigraph {
 
   public Unigraph(int range) {
     this(new BitSet(range), makeAdjs(range));
+  }
+
+  @Override
+  public synchronized int[] neighbors(int v) {
+    return bitsOn3(adjs[v]);
+  }
+
+  @Override
+  public synchronized Edge[] neighborEdges(int v) {
+    final BitSet bs = adjs[v];
+    final int N = bs.cardinality();
+    final Edge[] edges = new Edge[N];
+    int v2 = bs.nextSetBit(0);
+    for (int i = 0; i < N; ++i) {
+      edges[i] = new Edge(v, v2);
+      v2 = bs.nextSetBit(v2 + 1);
+    }
+    return edges;
   }
 
   @Override
@@ -20,16 +39,16 @@ public final class Unigraph extends AbstractGraph {
     validateV(this, v);
 
     // Remove adjacency for all successors
-    final BitSet succs = super.adjs[v];
+    final BitSet succs = adjs[v];
     for (int s = succs.nextSetBit(0); s != -1; s = succs.nextSetBit(s + 1)) {
-      super.adjs[s].set(v, false);
+      adjs[s].set(v, false);
     }
 
     // Remove adjacency to all successors
     succs.clear();
 
     // Bye vertices!
-    super.vs.set(v, false);
+    vs.set(v, false);
     return this;
   }
 
@@ -39,12 +58,12 @@ public final class Unigraph extends AbstractGraph {
     validateV(this, v2);
 
     // Add both to the vertex set (they may be already present)
-    super.vs.set(v1);
-    super.vs.set(v2);
+    vs.set(v1);
+    vs.set(v2);
 
     // Make bidirectional adjacency
-    super.adjs[v1].set(v2);
-    super.adjs[v2].set(v1);
+    adjs[v1].set(v2);
+    adjs[v2].set(v1);
 
     return this;
   }
@@ -55,19 +74,19 @@ public final class Unigraph extends AbstractGraph {
     validateV(this, v2);
 
     // Remove bidirectional adjacency
-    super.adjs[v1].set(v2, false);
-    super.adjs[v2].set(v1, false);
+    adjs[v1].set(v2, false);
+    adjs[v2].set(v1, false);
 
     return this;
   }
 
   @Override
   public synchronized IGraph cloneme() {
-    final BitSet vs = (BitSet) super.vs.clone();
+    final BitSet vs = (BitSet) this.vs.clone();
 
-    final BitSet[] adjs = new BitSet[super.adjs.length];
+    final BitSet[] adjs = new BitSet[this.adjs.length];
     for (int i = 0; i < adjs.length; i++) {
-      adjs[i] = (BitSet) super.adjs[i].clone();
+      adjs[i] = (BitSet) this.adjs[i].clone();
     }
 
     return new Unigraph(vs, adjs);

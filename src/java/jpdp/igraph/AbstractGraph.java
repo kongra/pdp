@@ -4,9 +4,9 @@
  */
 package jpdp.igraph;
 
-import static jpdp.igraph.IGraphTools.bitsOn3;
-import static jpdp.igraph.IGraphTools.makeAdjs;
-import static jpdp.igraph.IGraphTools.validateV;
+import static jpdp.igraph.Tools.bitsOn3;
+import static jpdp.igraph.Tools.makeAdjs;
+import static jpdp.igraph.Tools.validateV;
 
 import java.util.BitSet;
 
@@ -40,24 +40,6 @@ abstract class AbstractGraph implements IGraph, IMutableGraph {
   @Override
   public synchronized boolean hasEdge(int v1, int v2) {
     return adjs[v1].get(v2);
-  }
-
-  @Override
-  public synchronized int[] successors(int v) {
-    return bitsOn3(adjs[v]);
-  }
-
-  @Override
-  public synchronized Edge[] successorEdges(int v) {
-    final BitSet bs = adjs[v];
-    final int N = bs.cardinality();
-    final Edge[] edges = new Edge[N];
-    int v2 = bs.nextSetBit(0);
-    for (int i = 0; i < N; ++i) {
-      edges[i] = new Edge(v, v2);
-      v2 = bs.nextSetBit(v2 + 1);
-    }
-    return edges;
   }
 
   @Override

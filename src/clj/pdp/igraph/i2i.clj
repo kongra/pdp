@@ -13,16 +13,19 @@
 
 
 (defn range
+  {:inline (fn [m] `(.range ~m))}
   [^I2I m]
   (.range m))
 
 
 (defn size
+  {:inline (fn [m] `(.size ~m))}
   [^I2I m]
   (.size m))
 
 
 (defn empty?
+  {:inline (fn [m] `(.isEmpty ~m))}
   [^I2I m]
   (.isEmpty m))
 

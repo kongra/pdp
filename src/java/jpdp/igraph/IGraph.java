@@ -18,10 +18,6 @@ public interface IGraph {
 
   boolean hasEdge(int v1, int v2);
 
-  int[] successors(int v);
-
-  Edge[] successorEdges(int v);
-
   public IGraph cloneme();
 
 }

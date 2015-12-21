@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.List;
 
-public final class IGraphTools {
+public final class Tools {
 
   public static List<Integer> bitsOn1(BitSet bs) {
     final List<Integer> indexes = new ArrayList<>();
@@ -59,7 +59,7 @@ public final class IGraphTools {
     }
   }
 
-  private IGraphTools() {
+  private Tools() {
 
   }
 
