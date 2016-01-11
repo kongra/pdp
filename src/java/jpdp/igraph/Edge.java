@@ -30,7 +30,7 @@ public final class Edge {
       return true;
     if (obj == null)
       return false;
-    if (getClass() != obj.getClass())
+    if (Edge.class != obj.getClass())
       return false;
     Edge other = (Edge) obj;
     return v1 == other.v1 && v2 == other.v2;

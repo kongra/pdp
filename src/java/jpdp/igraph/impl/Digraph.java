@@ -2,13 +2,18 @@
  * Copyright (c) Konrad Grzanek. All rights reserved.
  * Created 2015-12-15
  */
-package jpdp.igraph;
+package jpdp.igraph.impl;
 
-import static jpdp.igraph.Tools.bitsOn3;
-import static jpdp.igraph.Tools.makeAdjs;
-import static jpdp.igraph.Tools.validateV;
+import static jpdp.igraph.impl.Tools.bitsOn3;
+import static jpdp.igraph.impl.Tools.makeAdjs;
+import static jpdp.igraph.impl.Tools.validateV;
 
 import java.util.BitSet;
+
+import jpdp.igraph.Edge;
+import jpdp.igraph.IDigraph;
+import jpdp.igraph.IGraph;
+import jpdp.igraph.IMutableGraph;
 
 public final class Digraph extends AbstractGraph implements IDigraph {
 
@@ -17,12 +22,12 @@ public final class Digraph extends AbstractGraph implements IDigraph {
   }
 
   @Override
-  public synchronized long[] predecessors(long v) {
+  public  long[] predecessors(long v) {
     return bitsOn3(ins[(int) v]);
   }
 
   @Override
-  public Edge[] predecessorEdges(long v) {
+  public  Edge[] predecessorEdges(long v) {
     final BitSet bs = ins[(int) v];
     final int N = bs.cardinality();
     final Edge[] edges = new Edge[N];
@@ -35,12 +40,12 @@ public final class Digraph extends AbstractGraph implements IDigraph {
   }
 
   @Override
-  public synchronized long[] successors(long v) {
+  public  long[] successors(long v) {
     return bitsOn3(adjs[(int) v]);
   }
 
   @Override
-  public synchronized Edge[] successorEdges(long v) {
+  public  Edge[] successorEdges(long v) {
     final BitSet bs = adjs[(int) v];
     final int N = bs.cardinality();
     final Edge[] edges = new Edge[N];
@@ -53,60 +58,68 @@ public final class Digraph extends AbstractGraph implements IDigraph {
   }
 
   @Override
-  public synchronized IMutableGraph removeVertex(long v) {
+  public  IMutableGraph removeVertex(long v) {
     validateV(this, v);
 
+    final int iv = (int) v;
+
     // Remove adjacency for all predecessors
-    final BitSet preds = ins[(int) v];
+    final BitSet preds = ins[iv];
     for (int p = preds.nextSetBit(0); p != -1; p = preds.nextSetBit(p + 1)) {
-      adjs[p].set((int) v, false);
+      adjs[p].set(iv, false);
     }
 
     // Remove ins for all successors
-    final BitSet succs = adjs[(int) v];
+    final BitSet succs = adjs[iv];
     for (int s = succs.nextSetBit(0); s != -1; s = succs.nextSetBit(s + 1)) {
-      ins[s].set((int) v, false);
+      ins[s].set(iv, false);
     }
 
     // Remove adjacency to all successors
-    adjs[(int) v].clear();
+    adjs[iv].clear();
 
     // Bye vertices!
-    vs.set((int) v, false);
+    vs.set(iv, false);
 
     return this;
   }
 
   @Override
-  public synchronized IMutableGraph addEdge(long v1, long v2) {
+  public  IMutableGraph addEdge(long v1, long v2) {
     validateV(this, v1);
     validateV(this, v2);
+
+    final int iv1 = (int) v1;
+    final int iv2 = (int) v2;
 
     // Add both to the vertex set (may be already present)
-    vs.set((int) v1);
-    vs.set((int) v2);
+    vs.set(iv1);
+    vs.set(iv2);
 
     // Make unidirectional adjacency
-    adjs[(int) v1].set((int) v2);
-    ins[(int) v2].set((int) v1);
+    adjs[iv1].set(iv2);
+    ins[iv2].set(iv1);
 
     return this;
   }
 
   @Override
-  public synchronized IMutableGraph removeEdge(long v1, long v2) {
+  public  IMutableGraph removeEdge(long v1, long v2) {
     validateV(this, v1);
     validateV(this, v2);
 
+    final int iv1 = (int) v1;
+    final int iv2 = (int) v2;
+
     // Remove unidirectional adjacency
-    adjs[(int) v1].set((int) v2, false);
-    ins[(int) v2].set((int) v1, false);
+    adjs[iv1].set(iv2, false);
+    ins[iv2].set(iv1, false);
 
     return this;
   }
 
   @Override
-  public synchronized IGraph cloneme() {
+  public  IGraph cloneme() {
     final BitSet vs = (BitSet) this.vs.clone();
 
     final BitSet[] adjs = new BitSet[this.adjs.length];

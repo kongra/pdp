@@ -3,7 +3,8 @@
 
 (ns pdp.digraph
   (:use    [clongra.core])
-  (:import [jpdp.igraph IDigraph Digraph])
+  (:import [jpdp.igraph      IDigraph]
+           [jpdp.igraph.impl Digraph ])
   (:gen-class))
 
 

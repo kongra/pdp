@@ -7,7 +7,8 @@
             [pdp.igraph      :as g]
             [primitive-math  :as p])
   (:use     [clongra.core])
-  (:import  [jpdp.igraph IUnigraph Unigraph])
+  (:import  [jpdp.igraph      IUnigraph]
+            [jpdp.igraph.impl Unigraph ])
   (:gen-class))
 
 

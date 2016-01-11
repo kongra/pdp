@@ -2,9 +2,11 @@
  * Copyright (c) Konrad Grzanek. All rights reserved.
  * Created 2015-12-13
  */
-package jpdp.igraph;
+package jpdp.igraph.impl;
 
 import java.util.BitSet;
+
+import jpdp.igraph.IGraph;
 
 public final class Tools {
 
@@ -20,9 +22,10 @@ public final class Tools {
   }
 
   public static BitSet[] makeAdjs(long range) {
-    BitSet[] adjs = new BitSet[(int) range];
-    for (int i = 0; i < range; i++) {
-      adjs[i] = new BitSet((int) range);
+    final int irange = (int) range;
+    BitSet[] adjs = new BitSet[irange];
+    for (int i = 0; i < irange; i++) {
+      adjs[i] = new BitSet(irange);
     }
     return adjs;
   }
@@ -34,7 +37,7 @@ public final class Tools {
   public static void validateV(long range, long v) {
     if (v < 0 || v >= range) {
       throw new IllegalArgumentException("Vertex " + v
-          + " is out of range 0 .. " + (range - 1));
+          + " is out of valid range 0 .. " + (range - 1));
     }
   }
 

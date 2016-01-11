@@ -2,23 +2,26 @@
  * Copyright (c) Konrad Grzanek. All rights reserved.
  * Created 2015-12-15
  */
-package jpdp.igraph;
+package jpdp.igraph.impl;
 
-import static jpdp.igraph.Tools.bitsOn3;
-import static jpdp.igraph.Tools.makeAdjs;
-import static jpdp.igraph.Tools.validateV;
+import static jpdp.igraph.impl.Tools.bitsOn3;
+import static jpdp.igraph.impl.Tools.makeAdjs;
+import static jpdp.igraph.impl.Tools.validateV;
 
 import java.util.BitSet;
+
+import jpdp.igraph.IGraph;
+import jpdp.igraph.IMutableGraph;
 
 abstract class AbstractGraph implements IGraph, IMutableGraph {
 
   @Override
-  public long range() { // No need to synchronize, adjs.length is final
+  public long range() {
     return adjs.length;
   }
 
   @Override
-  public synchronized long verticesCount() {
+  public long verticesCount() {
     return vs.cardinality();
   }
 
@@ -28,22 +31,22 @@ abstract class AbstractGraph implements IGraph, IMutableGraph {
   }
 
   @Override
-  public synchronized long[] vertices() {
+  public long[] vertices() {
     return bitsOn3(vs);
   }
 
   @Override
-  public synchronized boolean hasVertex(long v) {
+  public boolean hasVertex(long v) {
     return vs.get((int) v);
   }
 
   @Override
-  public synchronized boolean hasEdge(long v1, long v2) {
+  public boolean hasEdge(long v1, long v2) {
     return adjs[(int) v1].get((int) v2);
   }
 
   @Override
-  public synchronized IMutableGraph addVertex(long v) {
+  public IMutableGraph addVertex(long v) {
     validateV(this, v);
     vs.set((int) v);
     return this;

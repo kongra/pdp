@@ -72,11 +72,6 @@ public final class I2I {
   }
 
   @Override
-  public int hashCode() {
-    return 31 + Arrays.hashCode(entries);
-  }
-
-  @Override
   public String toString() {
     StringBuilder buf = new StringBuilder("ii{");
     for (long n = nextNonNullEntryIndex(0); n != -1;) {
@@ -99,12 +94,17 @@ public final class I2I {
   }
 
   @Override
+  public int hashCode() {
+    return 31 + Arrays.hashCode(entries);
+  }
+
+  @Override
   public boolean equals(Object obj) {
     if (this == obj)
       return true;
     if (obj == null)
       return false;
-    if (getClass() != obj.getClass())
+    if (I2I.class != obj.getClass())
       return false;
     I2I other = (I2I) obj;
     return Arrays.equals(entries, other.entries);

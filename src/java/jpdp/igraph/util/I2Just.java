@@ -6,7 +6,7 @@ package jpdp.igraph.util;
 
 import java.util.Arrays;
 
-public class I2Just<T> {
+public class I2Just {
 
   public I2Just(long range) {
     entries = new Object[(int) range];
@@ -48,12 +48,11 @@ public class I2Just<T> {
     return false;
   }
 
-  @SuppressWarnings("unchecked")
-  public T get(long n) {
-    return (T) entries[(int) n];
+  public Object get(long n) {
+    return entries[(int) n];
   }
 
-  public I2Just put(long n, T v) {
+  public I2Just put(long n, Object v) {
     entries[(int) n] = v;
     return this;
   }
@@ -81,7 +80,7 @@ public class I2Just<T> {
       return true;
     if (obj == null)
       return false;
-    if (getClass() != obj.getClass())
+    if (I2Just.class != obj.getClass())
       return false;
     I2Just other = (I2Just) obj;
     return Arrays.equals(entries, other.entries);
